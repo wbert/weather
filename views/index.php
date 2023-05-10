@@ -50,8 +50,9 @@
               </div>
               <div class="row">
                 <div class="col-lg-8 mb-4 order-0">
-                <div class="card">
+                <div class="card shadow">
                 <h5 class="card-header">Contacts</h5>
+                      <div class="card-body">
                       <div class="table-responsive text-nowrap">
                         <table class="table">
                           <thead class="text-center">
@@ -108,12 +109,38 @@
                           ?>
                         </table>
                       </div>
+                      </div>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4 order-0">
                     
-                    <div class="card"> 
-                      <h5 class="card-header">News</h5>
+                    <div class="card shadow"> 
+                      <h5 class="card-header">Weather Forecast</h5>
+                          <div class="card-body">
+                            <div class="row justify-content-center">
+                                  <h2><strong><i class='bx bx-current-location bx-tada' style="font-size: 42px;"></i>Davao City</strong></h2>
+                                    <img  src="images/thermometer.png" style="width:50%;heigth:50%" >
+                          
+                                <h3 class="text-center mt-4" id="temperature"></h3>
+                                <h5 class="text-center" id="description" ></h5>
+                            </div>
+                            <div class="row justify-content-around mt-3">
+                                <div class="col">
+                                <i class='bx bx-water bx-tada bx-flip-horizontal' ></i>
+                                  <h3 class="">Humidty</h3>
+                                  <h5 class="" id="humidity"></h5>
+                                </div>
+                                <div class="col">
+                                  <div class="row">
+                                  <i class='bx bx-wind bx-fade-right bx-flip-horizontal' ></i>
+                                  <h3 class="">Wind</h3>
+                                  <h5 class="" id="wind"></h5>
+                                  </div>
+                                </div>
+                            </div>
+
+                          </div> 
+                          
 
                     </div>
                 </div>
@@ -230,321 +257,7 @@
             </div>
         </div>
   <!-- modal end -->
-<script>
-  $(function(){
-        $(document).on('click', '#submit_contact', function(){
-          event.preventDefault();
-          var name = document.getElementById("name");
-          var contact_number = document.getElementById("contact_number");
-          
-          
-          const Toast = Swal.mixin({
-            customClass: {
-                title:'textColor1',
-            },
-            toast: true,
-            position: 'center',
-            
-            showConfirmButton: true,
-            showCancelButton: true,
-            })
-        Toast.fire({
-            title: 'Adding Contact',
-            text: "Are you sure you want to add "+name.value+" 's data?",
-            icon: 'warning',
-            confirmButtonColor: '#696cff',
-            confirmButtonText: 'Yes'
-        }).then((result) => {
-            if (result.isConfirmed) {
-              addcontact(name.value,contact_number.value);
-            }
-        });
-        });
-
-
-        function addcontact(name,contact_number){
-
-        var values = {
-            "name": name,
-            "contact_number":contact_number
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "../controller/addcontact.php",
-            data: values,
-            cache: false,
-            success: function(data){
-                if(data=="success"){
-                    const Toast = Swal.mixin({
-                        customClass: {
-                            title:'textColor1',
-                        },
-                        toast: true,
-                        position: 'center',
-                        showConfirmButton: true,
-                        
-                    });
-
-                    let timerInterval
-                    Toast.fire({
-                    title: 'Success',
-                    html: 'Contact Added',
-                    timer: 1000,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading()
-                        const b = Swal.getHtmlContainer().querySelector('b')
-                        timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                        }, 100)
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval)
-                    }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            location.reload(true);
-                        }
-                    });
-                }
-
-            }
-        });
-    }
-    
-      $(document).on('click', '#delbtn', function(){
-
-            var contact_id = $(this).data('contact_id');
-            var contact_name = $(this).data('contact_name');
-
-            const Toast = Swal.mixin({
-                customClass: {
-                    title:'textColor1',
-                },
-                toast: true,
-                position: 'center',
-                
-                showConfirmButton: true,
-                showCancelButton: true,
-                })
-            Toast.fire({
-                title: 'Deleting customer information!',
-                text: "Are you sure you want to delete "+contact_name+" 's data?",
-                icon: 'warning',
-                confirmButtonColor: '#696cff',
-                confirmButtonText: 'Yes'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    delcontact(contact_id);
-                }
-            });
-
-            });
-
-            function delcontact(contact_id){
-            var values = {
-                "contact_id": contact_id,
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "../controller/delcontact.php",
-                data: values,
-                cache: false,
-                success: function(data){
-                    if(data=="success"){
-                        const Toast = Swal.mixin({
-                            customClass: {
-                                title:'textColor1',
-                            },
-                            toast: true,
-                            position: 'center',
-                            showConfirmButton: true,
-                            
-                        });
-
-                        let timerInterval
-                        Toast.fire({
-                        title: 'Information deleted!',
-                        html: 'Customer information has been deleted.',
-                        timer: 1000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                        allowEscapeKey: false,
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft()
-                            }, 100)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                        }).then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
-                                location.reload(true);
-                            }
-                        });
-                    }
-
-                }
-            });
-            }
-        
-            $(document).on('click', '#editbtn', function(){
-
-            var contact_id = $(this).data('contact_id');
-            var contact_name = $(this).data('contact_name');
-            var contact_number = $(this).data('contact_number');
-            
-            $('#e_contact_id').val(contact_id);
-            $('#e_contact_name').val(contact_name);
-            $('#e_contact_number').val(contact_number);
-
-                
-
-
-            });
-
-            $(document).on('click', '#e_emp', function(){
-
-            var contact_id = $('#e_contact_id').val();
-            var contact_name = $('#e_contact_name').val().trimLeft();
-            var contact_number = $('#e_contact_number').val().trimLeft();
-
-
-            if(contact_name == '' || contact_number == '' ){
-                const Toast = Swal.mixin({
-                    customClass: {
-                        title:'textColor1',
-                    },
-                    toast: true,
-                    position: 'center',
-                    showConfirmButton: true,
-                    
-                    confirmButtonColor: '#696cff',
-                    })
-                    Toast.fire(
-                        'Fill out all fields!',
-                        'Please don\'t leave a field empty.',
-                        'error'
-                    );
-                return;
-            }
-            else{
-                
-                const Toast = Swal.mixin({
-                    customClass: {
-                        title:'textColor1',
-                    },
-                    toast: true,
-                    position: 'center',
-                    
-                    showConfirmButton: true,
-                    showCancelButton: true,
-                    })
-                Toast.fire({
-                    title: 'Updating contact information!',
-                    text: "Are you sure you want to update this information?",
-                    icon: 'warning',
-                    confirmButtonColor: '#696cff',
-                    cancelButtonColor: 'btn-ligaya btn-ligaya-outline',
-                    confirmButtonText: 'Yes'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        editcust(contact_id, contact_name, contact_number);
-                    }
-                });
-            }
-
-            });
-
-            function editcust(contact_id, contact_name, contact_number){
-
-            var values = {
-                "contact_id": contact_id,
-                "contact_name": contact_name,
-                "contact_number": contact_number,
-            };
-
-            console.log(values);
-
-            $.ajax({
-                type: "POST",
-                url: "../controller/editcontact.php",
-                data: values,
-                cache: false,
-                success: function(data){
-                    if(data=="success"){
-                        const Toast = Swal.mixin({
-                            customClass: {
-                                title:'textColor1',
-                            },
-                            toast: true,
-                            position: 'center',
-                            showConfirmButton: true,
-                            
-                        });
-
-                        let timerInterval
-                        Toast.fire({
-                        title: 'Information updated!',
-                        html: 'Customer information has been updated.',
-                        timer: 1000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                        allowEscapeKey: false,
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading()
-                            const b = Swal.getHtmlContainer().querySelector('b')
-                            timerInterval = setInterval(() => {
-                            b.textContent = Swal.getTimerLeft()
-                            }, 100)
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                        }).then((result) => {
-                            /* Read more about handling dismissals below */
-                            if (result.dismiss === Swal.DismissReason.timer) {
-                                location.reload(true);
-                            }
-                        });
-                    }else{
-                        const Toast = Swal.mixin({
-                            customClass: {
-                                title:'textColor1',
-                            },
-                            toast: true,
-                            position: 'center',
-                            showConfirmButton: true,
-                            
-                            confirmButtonColor: '#696cff',
-                            })
-                            Toast.fire(
-                                'Already Exists!',
-                                'Customer already exists.',
-                                'error'
-                            );
-                        return;
-
-                    }
-                }
-            });
-      }
-
-
-
-  });
-</script>
+<script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+<script src="index.js"></script>
 
 </html>

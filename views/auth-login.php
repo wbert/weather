@@ -131,7 +131,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="email"
+                    id="username"
                     name="username"
                     placeholder="Enter your email or username"
                     autofocus
@@ -163,13 +163,13 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                  <button class="btn btn-primary d-grid w-100" id="login">Sign in</button>
                 </div>
 
               <p class="text-center">
-                <span>New on our platform?</span>
+                <!-- <span>New on our platform?</span>
                 <a href="auth-register-basic.html">
-                  <span>Create an account</span>
+                  <span>Create an account</span> -->
                 </a>
               </p>
             </div>
@@ -180,15 +180,6 @@
     </div>
 
     <!-- / Content -->
-
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div>
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -204,10 +195,13 @@
 
     <!-- Main JS -->
     <script src="../assets/js/main.js"></script>
+    <script src="auth-login.js"></script>
 
     <!-- Page JS -->
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
+  
 </html>

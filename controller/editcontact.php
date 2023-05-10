@@ -9,25 +9,26 @@
     checkExist($contact_id, $contact_name, $contact_number, $connection);
 
     function checkExist($contact_id, $contact_name, $contact_number,  $connection){
-        $checkcustsql = "SELECT * FROM contacts WHERE contact_id='$contact_id' AND contact_number='$contact_number'";
+        $checkcustsql = "SELECT * FROM contacts WHERE contact_name='$contact_name' AND contact_number='$contact_number'";
         $query = mysqli_query($connection, $checkcustsql);
 
         $exist = mysqli_num_rows($query);
 
         if ($exist>0) {
-            alterData($contact_id, $contact_name, $contact_number, $connection);
-            echo "success";
+            echo "error";
             
         }
         else{
-            echo "error";
+            alterData($contact_id, $contact_name, $contact_number, $connection);
+            echo "success";
+            
         }
     }
 
     function alterData($contact_id, $contact_name, $contact_number, $connection) {
 
         
-        $sql = "UPDATE employee SET contact_name='$contact_name',contact_number='$contact_number' WHERE contact_id='$contact_id'";
+        $sql = "UPDATE contacts SET contact_name='$contact_name',contact_number='$contact_number' WHERE contact_id='$contact_id'";
         mysqli_query($connection, $sql);
                
     }
