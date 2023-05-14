@@ -6,12 +6,27 @@
     box-sizing: border-box;
 }
 
+.special-card {
+    /* create a custom class so you 
+       do not run into specificity issues 
+       against bootstraps styles
+       which tends to work better than using !important 
+       (future you will thank you later)*/
+       background-color: rgba(0, 0, 0, 0.3); /* Change the opacity value (0.6 in this example) to your desired level */
+       color: white!important;
+    }
+
+.bg-image{
+    background-image: url("../views/images/bg-pic.jpg")!important;
+}
+
 body{
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background: #06283D; */
+    
+    
 }
 
 .container{

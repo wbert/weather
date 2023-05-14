@@ -11,7 +11,6 @@ $(function(){
         },
         toast: true,
         position: 'center',
-        
         showConfirmButton: true,
         showCancelButton: true,
         })

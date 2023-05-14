@@ -21,102 +21,35 @@
     <?php include'components/head.php';?>
   </head>
 
-  <body>
-    <!-- Layout wrapper -->
+  <body class="bg-image">
     <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        <!-- Menu -->
-        <?php include'components/sidebar.php'; ?>
-        <!-- / Menu -->
-
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
-
-          <?php include'components/navbar.php'; ?>
-          <!-- / Navbar -->
-
-          <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-                <div class="col-lg-8 mb-4 order-0">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                      Add Contact
-                    </button>
-                </div>
-              </div>
+            
               <div class="row">
                 <div class="col-lg-8 mb-4 order-0">
-                <div class="card shadow">
-                <h5 class="card-header">Contacts</h5>
-                      <div class="card-body">
-                      <div class="table-responsive text-nowrap">
-                        <table class="table">
-                          <thead class="text-center">
-                            <tr class="text-nowrap">                      
-                              <th>Name</th>
-                              <th>Contact Number</th>
-                              <th>Date Added</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody class="text-center">
-                          <?php
-                              $sql = "SELECT * FROM contacts";
-                              $query = mysqli_query($connection, $sql);
-
-                              while($row = mysqli_fetch_assoc($query)){
-
-                                  $contact_id = $row['contact_id'];
-                                  $contact_name = $row['contact_name'];
-                                  $contact_number = $row['contact_number'];
-                                  $date_added = $row['date_added'];
-                                  
-                            ?>
-                            <tr class="text-center">
-                              <td hidden><?php echo $contact_id;?></td>
-                              <td><?php echo $contact_name;?></td>
-                              <td><?php echo $contact_number;?></td>
-                              <td><?php echo $date_added;?></td> 
-                              <td>
-                              <div class="dropdown">
-                                  <button class="btn" type="button" id="cardOpt4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <i class="bx bx-dots-vertical-rounded"></i>
-                                  </button>
-                                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                          <a id="editbtn" class="dropdown-item text-danger" style="cursor: pointer;"  data-bs-toggle="modal" data-bs-target="#edit"
-                                              data-contact_id="<?php echo	$contact_id; ?>"
-                                              data-contact_name="<?php echo $contact_name; ?>"
-                                              data-contact_number="<?php echo $contact_number; ?>"
-                                              >Edit
-
-                                          </a>   
-                                          <a id="delbtn" class="dropdown-item text-danger" style="cursor: pointer;"
-                                              data-contact_id="<?php echo	$contact_id; ?>"
-                                              data-contact_name="<?php echo $contact_name; ?>"
-                                              >Delete
-                                          </a>     
-                                  </div>
-                              </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                          <?php
-                            }
-                          ?>
-                        </table>
-                      </div>
-                      </div>
+                <div class="card special-card"  >
+                <h1 class="card-header"><strong><span class="text-primary">AquaSense</span></strong></h1>
+                <div class="card-body">
+                  <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro necessitatibus minus facilis fugit error ex maiores est sint voluptatibus sunt in, ducimus quibusdam ipsa debitis excepturi reprehenderit harum nihil non Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum explicabo quas praesentium minima eius tempore officia quam doloribus repellat illum dolores aliquid reprehenderit similique corrupti officiis repellendus, mollitia id rem!
+                  Nulla enim, impedit est facilis quae incidunt eos dicta unde, blanditiis eligendi minima repellendus aliquam vero earum? Ipsum provident hic exercitationem non ex fuga blanditiis nam accusantium, consectetur maiores at!
+                  A facere placeat provident hic aperiam voluptatum assumenda reiciendis quaerat. Id itaque ipsum nesciunt omnis incidunt voluptatum sit quisquam qui placeat minus molestiae, harum inventore. Provident quibusdam nostrum maiores voluptates.
+                  Dolorem provident voluptas, quia at debitis fugit odio, atque dignissimos nobis quod libero officia accusantium ratione illum aspernatur neque voluptatem iste. Mollitia corporis exercitationem tempore porro, architecto eveniet rerum eos.
+                  Odio possimus sit, molestias libero quos voluptatum sed, qui quasi sunt perspiciatis repellat. Voluptas, optio. Quisquam laudantium voluptatem quis, consequuntur fuga maiores aperiam illo in corporis, velit necessitatibus obcaecati? Aliquam.</h6>
+                </div>
+                <center>
+                  <button class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                      Subscribe Now !
+                    </button></center>
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4 order-0">
                     
-                    <div class="card shadow"> 
-                      <h5 class="card-header">Weather Forecast</h5>
-                          <div class="card-body">
+                    <div class="card  special-card"> 
+                      <h4 class="card-header text-primary"><b>Weather Statistics</b></h4>
+                          <div class="card-body " >
                             <div class="row justify-content-center">
                                   <h2><strong><i class='bx bx-current-location bx-tada' style="font-size: 42px;"></i>Davao City</strong></h2>
                                     <img  src="images/thermometer.png" style="width:50%;heigth:50%" >
@@ -133,7 +66,7 @@
                                 <div class="col">
                                   <div class="row">
                                   <i class='bx bx-wind bx-fade-right bx-flip-horizontal' ></i>
-                                  <h3 class="">Wind</h3>
+                                  <h3 class="">Water Level</h3>
                                   <h5 class="" id="wind"></h5>
                                   </div>
                                 </div>
@@ -149,7 +82,7 @@
             <!-- / Content -->
 
             <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
+            <footer class="text-primary">
               <?php include'components/footer.php'; ?>
             </footer>
             <!-- / Footer -->
@@ -175,7 +108,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
+            <h5 class="modal-title text-primary" id="modalCenterTitle">Subscription</h5>
             <button
               type="button"
               class="btn-close"
@@ -198,7 +131,7 @@
             </div>
             <div class="row g-2">
               <div class="col mb-0">
-                <label for="emailWithTitle" class="form-label">Email</label>
+                <label for="emailWithTitle" class="form-label">Contact Number</label>
                 <input
                   type="number"
                   id="contact_number"
